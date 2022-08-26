@@ -13,6 +13,7 @@ const loadingFail = ref(false);
 const loading = ref(false);
 async function fetchStoreList(){
     loadingFail.value = false;
+    loading.value = true;
     try{
         const storeListResponse = await fetch(corsAnywhere + 'https://sushipass.sushiro.com.hk/api/2.0/info/storelist?latitude=22&longitude=114&numresults=25&region=HK', fetchOptions);
         if (storeListResponse.ok){
@@ -29,7 +30,6 @@ async function fetchStoreList(){
 fetchStoreList()
 
 async function fetchStoresDetails(){
-    loading.value = true;
     console.log('started loading')
     let date = new Date;
     let minute = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
@@ -57,7 +57,7 @@ function convertTicket(string){
 <template>
     <h1>壽司郎籌號</h1>
     <p>更新時間：{{ updateTime }}</p>
-    <button v-if="!loadingFail" :disabled="loading" @click="fetchStoresDetails()">
+    <button v-if="!loadingFail" :disabled="loading" @click="fetchStoreList()">
         <span v-if="loading">更新中</span>
         <span v-else>更新</span>
     </button>
