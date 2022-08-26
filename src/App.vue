@@ -73,6 +73,7 @@ function convertTicket(string){
                     <th>店鋪</th>
                     <th>狀態</th>
                     <th>派籌狀態</th>
+                    <th>輪侯組數</th>
                     <th>下一張籌號</th>
                     <th>下兩張籌號</th>
                     <th>下三張籌號</th>
@@ -81,6 +82,7 @@ function convertTicket(string){
                     <td>{{ store.name }}</td>
                     <td>{{ convertStatus(store.storeStatus) }}</td>
                     <td>{{ convertTicket(store.netTicketStatus) }}</td>
+                    <td>{{ store.wait }}</td>
                     <td>
                         <span v-if="!store.storeQueue">Loading</span>
                         <span v-else-if="store.storeQueue.length == 0">N/A</span>
@@ -113,8 +115,10 @@ body {
     justify-content: center;
     align-items: center;
 }
+table{
+    width: 80%;
+}
 th{
-    min-width: 150px;
     background-color: #515151;
 }
 button{
