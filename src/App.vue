@@ -30,7 +30,6 @@ async function fetchStoreList(){
 fetchStoreList()
 
 async function fetchStoresDetails(){
-    console.log('started loading')
     let date = new Date;
     let minute = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
     updateTime.value = date.getHours() + ':' + minute ;
@@ -38,10 +37,8 @@ async function fetchStoresDetails(){
         let storeResponse = await fetch(corsAnywhere + 'https://sushipass.sushiro.com.hk/api/2.0/remote/groupqueues?region=HK&storeid=' + storeList.value[i].id, fetchOptions);
         let storeStatus = await storeResponse.json();
         storeList.value[i].storeQueue = storeStatus.storeQueue;
-        console.log (storeList.value[i].storeQueue[0]);
     }
     loading.value = false;
-    console.log('loading finished')
 }
 function convertStatus(string){
     return (string === 'OPEN') ? '營業中' : '閉店中';
