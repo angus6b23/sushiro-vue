@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, reactive } from 'vue'
-const corsAnywhere = 'https://cors.freehi.ga/'
+const corsAnywhere = 'https://cors.freehi.workers.dev/?'
 let fetchOptions = {
     method: 'GET',
     headers: {
