@@ -96,6 +96,7 @@ function clearNotification(){
     notificationWorker.postMessage({cancel: true});
     notificationOn.value = false;
 }
+navigator.serviceWorker.register('./src/web-worker.js');
 </script>
 
 <template>
