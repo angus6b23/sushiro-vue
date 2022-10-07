@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, reactive } from 'vue';
+document.title = 'Sushiro - vue';
 const corsAnywhere = 'https://cors.freehi.workers.dev/?'
 let fetchOptions = {
     method: 'GET',
@@ -96,13 +97,15 @@ function clearNotification(){
     notificationWorker.postMessage({cancel: true});
     notificationOn.value = false;
 }
-navigator.serviceWorker.register('./src/web-worker.js');
+
 </script>
 
 <template>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico">
+        <title>Sushiro queue</title>
     </head>
     <h1>壽司郎籌號</h1>
     <p>更新時間：{{ updateTime }}</p>
