@@ -54,6 +54,7 @@ function convertStatus(string){
 function convertTicket(string){
     switch(string){
         case 'OFFLINE_MANUAL': return '派籌中';
+        case 'OFFLINE_CLOSING': return '停止派籌';
         case 'OFFLINE_CLOSED': return '停止派籌';
         default: return string;
     }
