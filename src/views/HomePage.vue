@@ -12,7 +12,7 @@
 				<ion-refresher-content></ion-refresher-content>
 			</ion-refresher>
 			<section v-if="anyBookmarkedStores" class="ion-margin">
-				<ion-title>已標記（自動更新籌號）</ion-title>
+				<ion-text><h3>已標記（自動更新籌號）</h3></ion-text>
 				<div class="wrapper">
 					<div v-for="store in stores" :key="store.id" style="flex-grow: 1" :class="{ none: !store.isBookmark}">
 						<div v-if="store.isBookmark" class="card-container">
@@ -22,7 +22,7 @@
 				</div>
 			</section>
 			<section class="ion-margin">
-				<ion-title>所有分店</ion-title>
+				<ion-text><h3>所有分店</h3></ion-text>
 				<div class="wrapper">
 					<div v-for="store in stores" :key="store.id" style="flex-grow: 1" :class="{ none: store.isBookmark}">
 						<div v-if="!store.isBookmark" class="card-container">
