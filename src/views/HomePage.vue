@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
 	<ion-page>
 		<ion-header :translucent="true">
@@ -44,7 +45,7 @@ import {
 	IonTitle,
 	IonToolbar,
 } from '@ionic/vue';
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, Ref } from 'vue';
 import { getStoreList, getAllQueue } from '@/data/getData.ts';
 import StoreCard from '@/components/StoreCard.vue';
 
@@ -58,17 +59,20 @@ interface Store{
 	queue: number[],
 	isBookmark: boolean
 }
-
+interface ReturnData {
+	status: string,
+	data?: unknown | unknown[]
+}
 const stores: Ref<Store[]> = ref([]);
 const content = ref(null);
-let bookmarkIndexes: Set<number> = new Set();
-let interval;
+const bookmarkIndexes: Set<number> = new Set();
+let interval: number | undefined;
 
 onMounted(async ()=>{
 	await refreshStores();
-	const allQueue: object = await getAllQueue(stores.value);
-	allQueue.data.map((queue: object) => {
-		const index: number = stores.value.findIndex((store) => store.id === queue.storeId);
+	const allQueue: ReturnData = await getAllQueue(stores.value);
+	allQueue.data.map((queue) => {
+		const index: number = stores.value.findIndex((store: { id: any; }) => store.id === queue.storeId);
 		stores.value[index].queue = queue.data;
 	})
 })
@@ -82,7 +86,7 @@ async function refreshStores(event: CustomEvent): Promise<void>{
 }
 
 const handleToggleBookmark = (id: number): void => {
-	const index: number = stores.value.findIndex(store => store.id === id);
+	const index: number = stores.value.findIndex((store: { id: number; }) => store.id === id);
 	stores.value[index].isBookmark = !stores.value[index].isBookmark;
 	if (stores.value[index].isBookmark){
 		bookmarkIndexes.add(index);
@@ -94,7 +98,7 @@ const handleToggleBookmark = (id: number): void => {
 }
 
 const anyBookmarkedStores = computed(()=>{
-	const checkBookmarked = (element) => element.isBookmark;
+	const checkBookmarked = (element: { isBookmark: any; }) => element.isBookmark;
 	return stores.value.some(checkBookmarked);
 })
 

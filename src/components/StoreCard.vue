@@ -50,7 +50,7 @@ import { mapOutline, refreshOutline, bookmarkOutline, bookmark} from 'ionicons/i
 
 const props = defineProps(['store'])
 const emit = defineEmits(['toggleBookmark']);
-const store: Object = ref(props.store);
+const store: object = ref(props.store);
 let interval;
 const refreshStoreQueue = async (): Promise<void> => {
     await props.store.getQueue();

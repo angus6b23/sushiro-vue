@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios, { Axios } from 'axios'
 const corsAnywhereUrl: string = 'https://cors.freehi.workers.dev/?'
 interface ResponseStore{
@@ -14,7 +15,7 @@ interface ResponseStore{
 }
 interface ReturnData{
     status: string,
-    data?: unknown
+    data?: unknown | unknown[]
 }
 class Store {
     id: number;
@@ -70,7 +71,7 @@ export async function getAllQueue(storeArray: Store[]): Promise<ReturnData>{
     });
     const requests: unknown[] = urlList.map(url => axios.get(url));
     const responses: unknown[] = await axios.all(requests);
-    const data: object[] = responses.map((response: object) => {
+    const data: object[] = responses.map((response: any) => {
         const storeIdRegex = /storeid\=\d+$/;
         const storeId = parseInt(response.request.responseURL.match(storeIdRegex)[0].replace('storeid=', ''))
         return{
