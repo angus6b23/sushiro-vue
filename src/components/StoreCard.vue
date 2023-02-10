@@ -17,11 +17,11 @@
                 <!-- Left side contents: waiting time and ticket numbers -->
                 <ion-col class="no-padding" size="6">
                     <ion-text>輪侯組數: {{ store.wait }}<br /></ion-text>
-                    <ion-text v-if="store.queue.length > 0">店鋪籌號: {{ store.queue.join(', ') }}</ion-text>
+                    <ion-text v-if="store.queue.length > 0">店鋪籌號: <br />{{ store.queue.join(', ') }}</ion-text>
                     <ion-text v-else>暫無籌號資訊</ion-text>
                 </ion-col>
                 <!-- Right side contents: button group -->
-                <ion-col class="no-padding" size="6">
+                <ion-col class="no-padding flex" size="6">
                     <div class="button-group">
                         <ion-button fill="clear" size="small" :href="`https://www.google.com/maps/search/?api=1&query=${store.address}`" target="_blank">
                             <ion-icon slot="icon-only" :icon="mapOutline"></ion-icon>
@@ -45,8 +45,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonGrid, IonRow, IonCol, IonBadge, IonText, IonIcon } from '@ionic/vue';
-import { mapOutline, refreshOutline, bookmarkOutline, bookmark} from 'ionicons/icons';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonGrid, IonRow, IonCol, IonBadge, IonText, IonIcon, toastController } from '@ionic/vue';
+import { mapOutline, refreshOutline, bookmarkOutline, bookmark, checkmarkCircleOutline} from 'ionicons/icons';
 
 const props = defineProps(['store'])
 const emit = defineEmits(['toggleBookmark']);
@@ -54,10 +54,21 @@ const store: object = ref(props.store);
 let interval;
 const refreshStoreQueue = async (): Promise<void> => {
     await props.store.getQueue();
+    await presentToast();
 }
 
 const toggleBookmark = (): void => {
     emit("toggleBookmark", props.store.id);
+}
+
+const presentToast = async (): Promise<void> => {
+    const toast = await toastController.create({
+        message: '已更新店鋪籌號',
+        duration: 1000,
+        position: 'bottom',
+        icon: checkmarkCircleOutline
+    })
+    await toast.present()
 }
 </script>
 
@@ -69,6 +80,10 @@ const toggleBookmark = (): void => {
     display: flex;
     justify-items: end;
     align-items: center;
+}
+.flex{
+    display: flex;
+    justify-content: end;
 }
 .badges{
     margin-right: 0.5rem;
@@ -84,6 +99,7 @@ const toggleBookmark = (): void => {
     display: flex;
     justify-content: end;
     align-items: center;
+    align-self: center;
 }
 .button-group button{
     padding: 0px;

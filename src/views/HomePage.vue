@@ -40,6 +40,7 @@ import {
 	IonContent,
 	IonHeader,
 	IonPage,
+	IonText,
 	IonRefresher,
 	IonRefresherContent,
 	IonTitle,
