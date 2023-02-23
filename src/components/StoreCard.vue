@@ -26,16 +26,17 @@
                             <div class="button-group">
                                 <ion-button fill="clear" size="small"
                                     :href="`https://www.google.com/maps/search/?api=1&query=${store.address}`"
-                                    target="_blank">
+                                    target="_blank"
+                                    aria-label="在地圖搜尋此店">
                                     <ion-icon slot="icon-only" :icon="mapOutline"></ion-icon>
                                 </ion-button>
-                                <ion-button fill="clear" size="small" @click="refreshStoreQueue">
+                                <ion-button fill="clear" size="small" @click="refreshStoreQueue" aria-label="更新此店籌號">
                                     <ion-icon slot="icon-only" :icon="refreshOutline"></ion-icon>
                                 </ion-button>
-                                <ion-button fill="clear" size="small" v-if="store.isBookmark" @click="toggleBookmark">
+                                <ion-button fill="clear" size="small" v-if="store.isBookmark" @click="toggleBookmark" aria-label="標記此店；已標記的店鋪會自動更新籌號">
                                     <ion-icon slot="icon-only" :icon="bookmark"></ion-icon>
                                 </ion-button>
-                                <ion-button fill="clear" size="small" v-else @click="toggleBookmark">
+                                <ion-button fill="clear" size="small" v-else @click="toggleBookmark" aria-label="取消標記此店">
                                     <ion-icon slot="icon-only" :icon="bookmarkOutline"></ion-icon>
                                 </ion-button>
                             </div>
@@ -49,13 +50,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonGrid, IonRow, IonCol, IonBadge, IonText, IonIcon, toastController } from '@ionic/vue';
+import { IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonGrid, IonRow, IonCol, IonBadge, IonText, IonIcon, toastController } from '@ionic/vue';
 import { mapOutline, refreshOutline, bookmarkOutline, bookmark, checkmarkCircleOutline } from 'ionicons/icons';
+import { Store } from '@/data/classes'
 
 const props = defineProps(['store'])
 const emit = defineEmits(['toggleBookmark']);
-const store: object = ref(props.store);
-let interval;
+const store: Store = ref(props.store);
+
 const refreshStoreQueue = async (): Promise<void> => {
     await props.store.getQueue();
     await presentToast();
@@ -84,13 +86,13 @@ const presentToast = async (): Promise<void> => {
 
 .right {
     display: flex;
-    justify-items: end;
+    justify-items: flex-end;
     align-items: center;
 }
 
 .flex {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .badges {
@@ -108,7 +110,7 @@ const presentToast = async (): Promise<void> => {
 
 .button-group {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     align-self: center;
 }
