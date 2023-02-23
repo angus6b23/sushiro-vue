@@ -14,7 +14,7 @@
             <ion-card-title> {{ store.name }} </ion-card-title>
             <ion-card-content class="no-padding mt-1">
                 <ion-grid class="no-padding">
-                    <ion-row>
+                    <ion-row style="height: 4.5rem">
                         <!-- Left side contents: waiting time and ticket numbers -->
                         <ion-col class="no-padding" size="6">
                             <ion-text>輪侯組數: {{ store.wait }}<br /></ion-text>
