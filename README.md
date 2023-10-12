@@ -6,6 +6,7 @@
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Know how long is the queue of a chain sushi restaurant in Hong Kong at a glance.
+
 方便快捷咁睇到香港壽司郎籌號
 
 ## Features
