@@ -6,7 +6,7 @@ const corsAnywhereUrl: string = 'https://cors.freehi.workers.dev/?'
 export async function getStoreList(): Promise<Store[]>{
     try{
         let storeArray: Store[] = [];
-        const response = await axios(`${corsAnywhereUrl}https://sushipass.sushiro.com.hk/api/2.0/info/storelist?latitude=22&longitude=114&numresults=25&region=HK`);
+        const response = await axios(`${corsAnywhereUrl}https://sushipass.sushiro.com.hk/api/2.0/info/storelist?latitude=22&longitude=114&numresults=50&region=HK`);
         const responseArray = response.data;
         storeArray = responseArray.map((store: Store) =>{
             const { id, storeStatus, netTicketStatus, wait, name, address, area, latitude, longitude } = store;
