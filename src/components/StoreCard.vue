@@ -29,6 +29,7 @@
           class="flex items-center flex-1"
           size="small"
           fill="clear"
+          data-umami-event="save-store"
           @click="toggleSaveStore(props.store.id)"
         >
           <ion-icon slot="start" :icon="storeSave().icon"></ion-icon>
@@ -40,6 +41,7 @@
           size="small"
           fill="clear"
           target="_blank"
+          data-umami-event="open-map"
         >
           <ion-icon slot="start" :icon="locationOutline"></ion-icon>
           開啟地圖

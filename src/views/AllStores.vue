@@ -3,6 +3,7 @@
     <ion-searchbar
       v-model="search"
       placeholder="輸入店鋪名稱或地址搜尋"
+      data-umami-event="search"
     ></ion-searchbar>
     <ion-button id="open-action-sheet" fill="solid" class="min-w-16"
       >排序</ion-button
@@ -13,24 +14,28 @@
       class="flex-1 flex justify-center"
       :color="chipColor('hk')"
       @click="toggleFilter('hk')"
+      data-umami-event="filter"
       >香港島</ion-chip
     >
     <ion-chip
       class="flex-1 flex justify-center"
       :color="chipColor('kl')"
       @click="toggleFilter('kl')"
+      data-umami-event="filter"
       >九龍</ion-chip
     >
     <ion-chip
       class="flex-1 flex justify-center"
       :color="chipColor('nt')"
       @click="toggleFilter('nt')"
+      data-umami-event="filter"
       >新界</ion-chip
     >
     <ion-chip
       class="flex-1 flex justify-center"
       :color="chipColor('open')"
       @click="toggleFilter('open')"
+      data-umami-event="filter"
       >營業中</ion-chip
     >
   </section>
@@ -196,6 +201,9 @@ const resetFilters = () => {
 const actionSheetDismiss = (event: CustomEvent) => {
   if (event.detail.data) {
     sort.value = event.detail.data.sort;
+    if ((window as any).umami) {
+      (window as any).umami.track("sort", { method: event.detail.data.sort });
+    }
   }
 };
 const actionSheetButtons = () => [
