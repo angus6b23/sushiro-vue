@@ -109,6 +109,9 @@ const updateQueueNow = async () => {
 const queueInterval = setInterval(decrementQueueTicks, 200);
 
 const handleRefresh = async (event: RefresherCustomEvent) => {
+  if ((window as any).umami) {
+    (window as any).umami.track("refresh-all-stores");
+  }
   const res = await API.fetchShopList();
   storesRef.value = res;
   event.target.complete();

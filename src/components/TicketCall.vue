@@ -18,7 +18,7 @@
           queue?.storeQueue.join(", ")
         }}</ion-text>
       </div>
-      <ion-button @click="updateQueueNow(id)"
+      <ion-button @click="updateQueueNow(id)" data-umami-event="refresh-store"
         ><ion-icon :icon="refresh"></ion-icon>立即更新</ion-button
       >
     </div>

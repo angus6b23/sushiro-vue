@@ -52,6 +52,7 @@
         fill="solid"
         v-if="selectedStoreId !== props.store.id"
         @click="changeSelectedStoreId(props.store.id)"
+        data-umami-event="get-ticket"
       >
         <ion-icon slot="start" :icon="ticket"></ion-icon>
         查詢叫號
